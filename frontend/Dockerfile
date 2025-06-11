@@ -1,27 +1,27 @@
-# 1) Builder stage: use Node to install & build
-FROM node:18-alpine AS builder
+# frontend/Dockerfile
 
-# Install native build tools (needed by some npm packages)
+# 1) Builder: install & build
+FROM node:18-alpine AS builder
 RUN apk add --no-cache python3 make g++
 
 WORKDIR /web
-
-# 1️⃣ Copy package files and install via npm install
 COPY package.json package-lock.json ./
 RUN npm install --legacy-peer-deps --silent
 
-# 2️⃣ Bring in the source and build
 COPY . .
 RUN npm run build
 
-# 2) Production stage: serve via nginx
+# 2) Production image: Nginx
 FROM nginx:alpine
 
-# Clear default nginx content
+# Remove default content
 RUN rm -rf /usr/share/nginx/html/*
 
-# Copy our built files
+# Copy built React into place
 COPY --from=builder /web/dist /usr/share/nginx/html
+
+# Copy our custom Nginx config (will proxy /api → backend)
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
