@@ -1,0 +1,4 @@
+fastapi==0.111.0           # core web framework ─ minimal + typed ✅  :contentReference[oaicite:0]{index=0}
+uvicorn[standard]==0.30.1  # ASGI server + uvloop/httptools extras   :contentReference[oaicite:1]{index=1}
+requests==2.32.3           # HTTP client for OpenRouter / DeepSeek   :contentReference[oaicite:2]{index=2}
+python-dotenv==1.0.1       # load .env in summarize.py & api.py      :contentReference[oaicite:3]{index=3}

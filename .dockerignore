@@ -1,0 +1,22 @@
+# ─── general ───────────────
+.git
+.env
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.sqlite
+*.log
+
+# ─── backend / python ──────
+backend/__pycache__/
+
+# ─── frontend / node ───────
+frontend/node_modules/
+node_modules/
+npm-debug.log
+.DS_Store
+
+# ─── docker artefacts ──────
+Dockerfile
+docker-compose.yml

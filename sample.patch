@@ -1,0 +1,10 @@
+diff --git a/hello.py b/hello.py
+new file mode 100644
+index 0000000..e69de29
+--- /dev/null
++++ b/hello.py
+@@ -0,0 +1,4 @@
++def add(x, y):
++    return x + y
++
++print(add(2, 3))

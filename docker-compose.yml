@@ -1,0 +1,27 @@
+
+
+services:
+  # ──────────────────
+  # FastAPI + Uvicorn
+  # ──────────────────
+  backend:
+    build:
+      context: .                     # send the whole repo as build context
+      dockerfile: backend/Dockerfile # Dockerfile lives in backend/
+    env_file: .env                   # OPENROUTER_API_KEY, etc.
+    ports:
+      - "8000:8000"                  # host:container
+    restart: unless-stopped
+
+  # ────────────────
+  # React SPA (Vite)
+  # ────────────────
+  frontend:
+    build:
+      context: ./frontend            # two-stage build → Nginx image
+      # dockerfile defaults to ./frontend/Dockerfile, so no need to set
+    ports:
+      - "5173:80"                    # expose SPA on http://localhost:5173
+    depends_on:
+      - backend
+    restart: unless-stopped
